@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Quickcart</title>
+	<title>QuickCart</title>
 
 
 <!-- Code for font awesome cdn -->
@@ -19,7 +19,7 @@
 
 <!-- header section -->
 <header class="header">
-	<a href="#" class="logo"><i class="fa fa-shopping-basket" aria-hidden="true">Quickcart</i> </a>
+	<a href="#" class="logo"><i class="fa fa-shopping-basket" aria-hidden="true"> QuickCart</i> </a>
 
 
 <nav class="navbar">
@@ -42,6 +42,26 @@
 	<input type="search" id="search-box" placeholder="Search Here....">
 	<label for="search-box" class="fa fa-search"></label>
 </form>
+
+
+<!-- Shopping Cart -->
+<div class="shopping-cart">
+    <h2>Shopping Cart</h2>
+    <ul id="cart-items">
+<!-- Cart items will be dynamically added here -->
+
+    </ul>
+	<div class = "total">
+		<h3>Total: Rs. <span id="total">0.00</span></h3>
+		<a href="#" class="btn">Checkout</a>
+	</div>
+</div>
+
+<!-- JavaScript code to handle shopping cart functionality -->
+<script src="js/shopping-cart.js"></script>
+	
+
+</div>
 
 </header>
 
