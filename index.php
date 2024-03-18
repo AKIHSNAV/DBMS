@@ -1,7 +1,7 @@
 <?php
 include ('./includes/connect.php'); // Connect file to MySQL
 include ('./functions/common_function.php'); // Common functions file
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +74,7 @@ include ('./functions/common_function.php'); // Common functions file
                     <a class="nav-link" href="#">Welcome Guest</a> <!-- will be changed to customer's name -->
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="./users_area/user_login.php">Login</a>
                 </li>
             </ul>
         </nav>

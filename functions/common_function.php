@@ -1,5 +1,5 @@
 <?php
-include ('./includes/connect.php'); // Connect file to MySQL
+// include ('./includes/connect.php'); // Connect file to MySQL
 
 // display all products on home-page
 function display_products()
