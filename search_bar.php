@@ -48,8 +48,12 @@ include ('./functions/common_function.php'); // Common functions file
                             <a class="nav-link" href="#">Reviews</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i> </a>
+                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i><sup> <?php cart_item();?></sup></a>
                         </li>
+                        <li class = "total_price">
+                            <a href="#" class="nav-link">Total Price: Rs. <?php total_cart();?></a>
+                        </li>
+
 
                     </ul>
                     <form class="d-flex" role="search" action="" method="get">
