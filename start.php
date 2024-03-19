@@ -58,7 +58,7 @@
             </a>
         </li>
         <li class="option">
-            <a href="./admin_mode/index.php">
+            <a href="./admin_mode/login.php">
                 <i class="fas fa-user-shield"></i> Admin
             </a>
         </li>
