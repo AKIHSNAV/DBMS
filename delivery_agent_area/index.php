@@ -49,22 +49,16 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Quickcart</h1>
-    <h2>Please select your role:</h2>
+    <h1>Welcome Delivery Agent</h1>
     <ul class="options">
         <li class="option">
-            <a href="index.php?type=customer">
-                <i class="fas fa-shopping-cart"></i> Customer
+            <a href="delivery_login.php">
+                <i class="fas fa-shopping-cart"></i> Login
             </a>
         </li>
         <li class="option">
-            <a href="./admin_mode/index.php">
-                <i class="fas fa-user-shield"></i> Admin
-            </a>
-        </li>
-        <li class="option">
-            <a href="./delivery_agent_area/index.php">
-                <i class="fas fa-truck"></i> Delivery Agent
+            <a href="#">
+                <i class="fas fa-user-shield"></i> Sign Up
             </a>
         </li>
     </ul>
