@@ -46,15 +46,36 @@ include ('./functions/common_function.php'); // Common functions file
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Products</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#">Reviews</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i><sup> <?php cart_item();?></sup></a>
+
+                        <li class = "nav-item">
+                        <div class="nav-link"><i id="shopping-cart-icon" class="fa fa-shopping-cart" data-bs-toggle="dropdown"></i><sup> <?php cart_item();?></sup>
+                            <div class="dropdown-menu" id="cart-dropdown">
+                                <div class="cart-dropdown-header">
+                                    <h6>My Cart</h6>
+                                </div>
+                                <div class="cart-dropdown-body" style="max-height: 50vh; overflow-y: auto; width: 40vh;">
+                                    <?php show_cart();?>
+                                </div>
+                                <div class="cart-dropdown-footer">
+                                    <a href="cart.php" class="btn btn-primary">Go to Cart</a>
+                                    <a href="checkout.php" class="btn btn-success">Checkout</a> <!-- Added checkout button -->
+                                    <strong>Rs. <?php total_cart();?></strong>
+                                </div>
+                            </div>
+                        </div>
                         </li>
+                        
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i><sup> <?php cart_item();?></sup></a>
+                        </li> -->
                         <li class = "total_price">
                             <a href="#" class="nav-link">Total Price: Rs. <?php total_cart();?></a>
                         </li>

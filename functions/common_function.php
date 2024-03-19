@@ -198,7 +198,6 @@ function total_cart(){
     echo $total;
 
 }
-
 function show_cart(){
     global $con;
     $user_id = 1; // auto set customer id
@@ -206,7 +205,7 @@ function show_cart(){
     $result_cart = mysqli_query($con, $select_cart);
     $num_of_rows = mysqli_num_rows($result_cart);
     if ($num_of_rows == 0) {
-        echo "<h2 class = 'text-center text-danger'> No Products available in Cart! </h2>";
+        echo "<h2 class='text-center text-danger'>No Products available in Cart!</h2>";
     }
     while ($row_cart = mysqli_fetch_assoc($result_cart)) {
         $prod_id = $row_cart['productID'];
@@ -219,27 +218,30 @@ function show_cart(){
             $prod_image = $row_prod['prod_image'];
             $prod_price = $row_prod['price'];
             $total_price = $prod_price * $prod_qty;
-            echo "<div class='row'>
-                            <div class='col-md-3'>
-                                <img src='./images/$prod_image' class='img-fluid' alt='$prod_name image'>
-                            </div>
-                            <div class='col-md-6'>
-                                <h5>$prod_name</h5>
-                                <p>$prod_desc</p>
-                                <p>Price: ₹$prod_price</p>
-                            </div>
-                            <div class='col-md-3'>
-                                <div class='row'>
-                                    <div class='col-md-6'>
-                                        <input type='number' class='form-control' value='$prod_qty'>
-                                    </div>
-                                    <div class='col-md-6'>
-                                        <a href='#' class='btn btn-danger'>Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>";
+            echo "<div class='card'>
+                <div class='card-body'>
+                    <div class='row align-items-center'>
+                        <div class='col-md-4'>
+                            <img src='./images/$prod_image' class='img-fluid' alt='$prod_name image'>
+                        </div>
+                        <div class='col-md-8'>
+                            <h6>$prod_name</h6>
+                            <p>Price: ₹$prod_price</p>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-6'>
+                            <input type='number' class='form-control' value='$prod_qty'>
+                        </div>
+                        <div class='col-md-7'>
+                            <a href='#' class='btn btn-danger'>Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>";
         }
     }
 }
+
+
 ?>
