@@ -2,7 +2,7 @@
 
 CREATE DATABASE IF NOT EXISTS QuickCart;
 USE QuickCart;
--- DROP DATABASE QuickCart;
+-- DROP DATABASE QuickCart; 
 
 -- Customer table 
 CREATE TABLE IF NOT EXISTS customer (
@@ -157,8 +157,8 @@ CREATE TABLE IF NOT EXISTS orderConsistsProduct (
     productID INT NOT NULL,
     quantity INT NOT NULL DEFAULT 1 CHECK (quantity >= 1),
     PRIMARY KEY (orderID, productID),
-    FOREIGN KEY (orderID) REFERENCES `order`(orderID) ON DELETE CASCADE,
-    FOREIGN KEY (productID) REFERENCES product(productID) ON DELETE CASCADE
+    FOREIGN KEY (orderID) REFERENCES `order`(orderID),
+    FOREIGN KEY (productID) REFERENCES product(productID)
 );
 
 CREATE TABLE IF NOT EXISTS storeContainsProduct  (
@@ -240,7 +240,7 @@ INSERT INTO admin (password) VALUES
 SELECT * FROM admin;
 
 INSERT INTO productCategory (name, noOfProducts) VALUES
-('Dairy Products',28),
+('Dairy Products',30),
 ('Fruits & Vegetables',40),
 ('Munchies', 100),
 ('Sweets and Chocolates', 30),
@@ -255,19 +255,19 @@ INSERT INTO productCategory (name, noOfProducts) VALUES
 SELECT * FROM productCategory;
 
 INSERT INTO product (name, price, stock, brand, qty_bought, description, prod_image, categoryID) VALUES
-('Cow Milk', 27.00, 20, 'Amul', 7, "Pure and fresh cow's milk packed with great nutrition.","cow-milk.png", 1),
-('Go Cheese', 200, 8, 'Go', 5, 'Yummy cheese that brings magin in every bite.', "go-cheese.png", 1),
-('Carrot 500g', 34, 40, 'QuickCart', 14, 'Crunchy, sweet & tasty.', "carrot.png", 2),
-('Aloo Bhujia', 79.00, 60, 'Haldirams', 45, 'Crispy, crunchy snack that leaves you asking for more.', "aloo-bhujia.png", 3),
-('French Fries', 199.99, 40, 'McCain', 15, 'Crispy on the outside and fluffy in the centre, delicious in taste.', "french-fries.png", 3),
+('Cow Milk', 27.00, 20, 'Amul', 7, "Pure and fresh cow's milk packed with great nutrition.","cow-milk.jpg", 1),
+('Go Cheese', 200, 8, 'Go', 5, 'Yummy cheese that brings magin in every bite.', "go-cheese.jpg", 1),
+('Carrot 500g', 34, 40, 'QuickCart', 14, 'Crunchy, sweet & tasty.', "carrot.jpg", 2),
+('Aloo Bhujia', 79.00, 60, 'Haldirams', 45, 'Crispy, crunchy snack that leaves you asking for more.', "aloo-bhujia.jpg", 3),
+('French Fries', 199.99, 40, 'McCain', 15, 'Crispy on the outside and fluffy in the centre, delicious in taste.', "french-fries.jpg", 3),
 ('Milk Chocolate', 4299.99, 30, 'Cadbury', 8, 'Smooth chocolaty delight perfect to satisfy your sweet urges.', "milk-chocolate.jpg", 4),
 ('Antacid', 79.99, 40, 'Eno', DEFAULT, 'Gets to work in 6 seconds to neutralize acid in your stomach and provide fast relief.', "eno.jpeg", 5),
-('Mixed Fruit Juice 1L', 109.99, 25, 'Real', 12, 'Filled with the best qualities of 9 different fruits, no added preservatives.', "mixed-fruit.png", 6),
-('Cumin Seeds 100g', 46, 20, 'Whole Farm', 0, 'Cumin seeds/Jeera is used to give dishes a strong & spicy flavour.', "cumin-seeds.png", 7),
-('Body Lotion 400ml', 399.99, 60, 'Nivea', 40, 'Nourishes skin & provide long-lasting moisture.', "body-lotion.png", 8),
+('Mixed Fruit Juice 1L', 109.99, 25, 'Real', 12, 'Filled with the best qualities of 9 different fruits, no added preservatives.', "mixed-fruit.jpg", 6),
+('Cumin Seeds 100g', 46, 20, 'Whole Farm', 0, 'Cumin seeds/Jeera is used to give dishes a strong & spicy flavour.', "cumin-seeds.jpeg", 7),
+('Body Lotion 400ml', 399.99, 60, 'Nivea', 40, 'Nourishes skin & provide long-lasting moisture.', "body-lotion.jpg", 8),
 ('Coconut Oil 250ml', 199.99, 30, 'Parachute', 12, 'Nothing but 100% pure coconut oil.', "coconut-oil.jpg", 8),
 ('Three Men In A Boat', 129.99, 120, 'Jerome K. Jerome', 22, 'Treat yourself with humour and adventure.', "three-men-in-a-boat.jpg", 10),
-('Uno Cards', 127.99, 60, 'Mattel', 22, "The world's most beloved card game.", "uno.png", 11);
+('Uno Cards', 127.99, 60, 'Mattel', 22, "The world's most beloved card game.", "uno.jpg", 11);
 
 SELECT * FROM product;
 
