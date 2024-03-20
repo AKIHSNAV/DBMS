@@ -198,6 +198,20 @@ function total_cart(){
     echo $total;
 
 }
+function remove_cart(){
+    if (isset ($_GET['remove_cart'])) {
+        global $con;
+        $prod_id = $_GET['remove_cart'];
+        $user_id = 1; // auto set customer id
+        $delete_cart = "DELETE FROM addstocart WHERE productID = '$prod_id' AND customerID = '$user_id'";
+        $result_cart = mysqli_query($con, $delete_cart);
+        if ($result_cart) {
+            echo "<script>alert('Product removed from cart successfully!')</script>";
+            echo "<script>window.open('index.php', '_self')</script>";
+        }
+    }
+
+}
 function show_cart(){
     global $con;
     $user_id = 1; // auto set customer id
@@ -234,13 +248,22 @@ function show_cart(){
                             <input type='number' class='form-control' value='$prod_qty'>
                         </div>
                         <div class='col-md-7'>
-                            <a href='#' class='btn btn-danger'>Remove</a>
+                            <a href='index.php?remove_cart=$prod_id' class='btn btn-danger''>Remove</a>
                         </div>
                     </div>
                 </div>
             </div>";
         }
     }
+}
+function wallet(){
+    global $con;
+    $user_id = 1; // auto set customer id
+    $select_wallet = "SELECT * FROM wallet where customerID = '$user_id'";
+    $result_wallet = mysqli_query($con, $select_wallet);
+    $row_wallet = mysqli_fetch_assoc($result_wallet);
+    $wallet = $row_wallet['balance'];
+    echo $wallet;
 }
 
 

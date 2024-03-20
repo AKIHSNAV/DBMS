@@ -72,6 +72,11 @@ include ('./functions/common_function.php'); // Common functions file
                             </div>
                         </div>
                         </li>
+
+                        <li class = "wallet">
+                            <!-- use a wallet symbol -->
+                            <a href="#" class="nav-link"><i class = "fa fa-wallet"></i> Wallet: Rs. <?php wallet(); ?></a>
+                        </li>
                         
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i><sup> <?php cart_item();?></sup></a>
@@ -95,7 +100,7 @@ include ('./functions/common_function.php'); // Common functions file
         
         <?php
         Cart();
-        
+        remove_cart();
         ?>
 
 
