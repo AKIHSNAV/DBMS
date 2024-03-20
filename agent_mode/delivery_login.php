@@ -66,7 +66,9 @@ if (isset ($_POST['delivery_login'])) {
     $rows_count = mysqli_num_rows($result);
 
     if ($rows_count > 0) {
-        echo "<script>alert('Logged In successfully'); window.location.href = 'index.php';</script>";
+        $row_data = mysqli_fetch_assoc($result);
+        $agent_id = $row_data["agentID"];
+        echo "<script>alert('Logged In successfully'); window.location.href = 'index.php?agent_id=" . $agent_id . "';</script>";
     } else {
         echo "<script>alert('Invalid Credentials')</script>";
     }
