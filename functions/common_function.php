@@ -195,7 +195,7 @@ function total_cart(){
             $total += $prod_price * $prod_qty;
         }
     }
-    echo $total;
+    return $total;
 
 }
 function remove_cart(){
@@ -247,9 +247,21 @@ function show_cart(){
                         <div class='col-md-6'>
                             <input type='number' class='form-control' value='$prod_qty'>
                         </div>
-                        <div class='col-md-7'>
-                            <a href='index.php?remove_cart=$prod_id' class='btn btn-danger''>Remove</a>
+                        <div class='col-md-6'>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <a href='index.php?update_qnt=$prod_id&update_val=-1' class='btn btn-dark btn-sm rounded-circle'>-</a>
+                                </div>
+            
+
+                                
+                                <div class='col-md-6'>
+                                    <a href='index.php?update_qnt=$prod_id&update_val=1' class='btn btn-dark btn-sm rounded-circle'>+</a>
+                                </div>
+                            </div>
+                            
                         </div>
+                        <a href='index.php?remove_cart=$prod_id' class='btn btn-danger btn-sm'>Remove</a>
                     </div>
                 </div>
             </div>";
@@ -263,8 +275,30 @@ function wallet(){
     $result_wallet = mysqli_query($con, $select_wallet);
     $row_wallet = mysqli_fetch_assoc($result_wallet);
     $wallet = $row_wallet['balance'];
-    echo $wallet;
+    return $wallet;
 }
 
-
+function updateCart(){
+    if (isset($_GET['update_qnt'])){
+        global $con;
+        $prod_id = $_GET['update_qnt'];
+        $update_val = $_GET['update_val'];
+        $user_id = 1; // auto set customer id
+        $select_cart = "SELECT * FROM addstocart WHERE productID = '$prod_id' AND customerID = '$user_id'";
+        $result_cart = mysqli_query($con, $select_cart);
+        $row_cart = mysqli_fetch_assoc($result_cart);
+        $prod_qty = $row_cart['quantity'];
+        $new_qty = $prod_qty + $update_val;
+        if ($new_qty < 1) {
+            echo "<script>alert('Quantity cannot be less than 1!')</script>";
+            echo "<script>window.open('index.php', '_self')</script>";
+        }
+        $update_cart = "UPDATE addstocart SET quantity = '$new_qty' WHERE productID = '$prod_id' AND customerID = '$user_id'";
+        $result_update = mysqli_query($con, $update_cart);
+        if ($result_update) {
+            echo "<script>alert('Cart updated successfully!')</script>";
+            echo "<script>window.open('index.php', '_self')</script>";
+        }
+    }
+}
 ?>

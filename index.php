@@ -66,8 +66,18 @@ include ('./functions/common_function.php'); // Common functions file
                                 </div>
                                 <div class="cart-dropdown-footer">
                                     <a href="cart.php" class="btn btn-primary">Go to Cart</a>
-                                    <a href="checkout.php" class="btn btn-success">Checkout</a> <!-- Added checkout button -->
-                                    <strong>Rs. <?php total_cart();?></strong>
+                                    <?php
+                                    $totalPrice = total_cart(); // Get the total cart price
+                                    $walletBalance = wallet(); // Get the wallet balance
+
+                                    if ($totalPrice <= $walletBalance) {
+                                        echo '<a href="checkout.php" class="btn btn-success" >Checkout</a>'; // Allow checkout if wallet has sufficient funds
+                                    } else {
+                                        echo '<p>Insufficient funds in wallet, cannot checkout!</p>'; // Display message for insufficient funds
+                                    }
+                                    ?>
+
+                                    <strong>Rs. <?php echo total_cart();?></strong>
                                 </div>
                             </div>
                         </div>
@@ -75,14 +85,14 @@ include ('./functions/common_function.php'); // Common functions file
 
                         <li class = "wallet">
                             <!-- use a wallet symbol -->
-                            <a href="#" class="nav-link"><i class = "fa fa-wallet"></i> Wallet: Rs. <?php wallet(); ?></a>
+                            <a href="#" class="nav-link"><i class = "fa fa-wallet"></i> Wallet: Rs. <?php echo wallet(); ?></a>
                         </li>
                         
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i><sup> <?php cart_item();?></sup></a>
                         </li> -->
                         <li class = "total_price">
-                            <a href="#" class="nav-link">Total Price: Rs. <?php total_cart();?></a>
+                            <a href="#" class="nav-link">Total Price: Rs. <?php echo total_cart();?></a>
                         </li>
 
                     </ul>
@@ -101,6 +111,7 @@ include ('./functions/common_function.php'); // Common functions file
         <?php
         Cart();
         remove_cart();
+        updateCart();
         ?>
 
 
