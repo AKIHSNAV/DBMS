@@ -71,8 +71,44 @@ if (isset ($_GET['customer_id'])) {
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="#">Reviews</a>
                         </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-shopping-cart"></i> My Cart </a>
+                        <li class = "nav-item">
+                        <div class="nav-link"><i id="shopping-cart-icon" class="fa fa-shopping-cart" data-bs-toggle="dropdown"></i><sup> <?php cart_item($cust_id);?></sup>
+                            <div class="dropdown-menu" id="cart-dropdown">
+                                <div class="cart-dropdown-header">
+                                    <h6>My Cart</h6>
+                                </div>
+                                <div class="cart-dropdown-body" style="max-height: 50vh; overflow-y: auto; width: 40vh;">
+                                    <?php show_cart($cust_id);?>
+                                </div>
+                                <div class="cart-dropdown-footer">
+                                
+                                    <?php
+                                    $totalPrice = total_cart($cust_id); // Get the total cart price
+                                    $walletBalance = wallet($cust_id); // Get the wallet balance
+
+                                    if ($totalPrice <= $walletBalance) {
+                                        echo '<a href="checkout.php" class="btn btn-success" >Checkout</a>'; // Allow checkout if wallet has sufficient funds
+                                    } else {
+                                        echo '<p>Insufficient funds in wallet, cannot checkout!</p>'; // Display message for insufficient funds
+                                    }
+                                    ?>
+
+                                    <strong>Rs. <?php echo total_cart($cust_id);?></strong>
+                                </div>
+                            </div>
+                        </div>
+                        </li>
+
+                        <li class = "wallet">
+                            <!-- use a wallet symbol -->
+                            <a href="#" class="nav-link"><i class = "fa fa-wallet"></i> Wallet: Rs. <?php echo wallet($cust_id); ?></a>
+                        </li>
+                        
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="cart.php"><i class="fa fa-shopping-cart"></i><sup> <?php cart_item($cust_id);?></sup></a>
+                        </li> -->
+                        <li class = "total_price">
+                            <a href="#" class="nav-link">Total Price: Rs. <?php echo total_cart($cust_id);?></a>
                         </li>
 
                     </ul>
@@ -86,6 +122,11 @@ if (isset ($_GET['customer_id'])) {
                 </div>
             </div>
         </nav>
+        <?php
+        Cart($cust_id);
+        remove_cart($cust_id);
+        updateCart($cust_id);
+        ?>
 
 
         <!-- second child -->
