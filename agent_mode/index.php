@@ -62,16 +62,8 @@ if (isset($_GET['agent_id'])) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_wallet"
-                                class="nav-link text-dark bg-info my-1 mx-1">Wallet</a></button>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_reviews"
-                                class="nav-link text-dark bg-info my-1 mx-1">Reviews</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_history"
-                                class="nav-link text-dark bg-info my-1 mx-1">History</a></button>
+                            <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_profile"
+                                class="nav-link text-dark bg-info my-1 mx-1">My Profile</a></button>
                         </li>
                     </ul>
                 </div>
@@ -144,14 +136,8 @@ if (isset($_GET['agent_id'])) {
        <!-- fourth child -->
 <div class="container my-3">
     <?php
-    if (isset($_GET['agent_wallet'])) {
-        include('agent_wallet.php');
-    }
-    if (isset($_GET['agent_reviews'])) {
-        include('agent_reviews.php');
-    }
-    if (isset($_GET['agent_history'])) {
-        include('agent_history.php');
+    if (isset($_GET['agent_profile'])) {
+        include('profile_page.php');
     }
     if (isset($_GET['agent_offline'])) {
         include('agent_offline.php');
