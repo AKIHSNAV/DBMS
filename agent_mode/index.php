@@ -62,8 +62,10 @@ if (isset($_GET['agent_id'])) {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_profile"
-                                class="nav-link text-dark bg-info my-1 mx-1">My Profile</a></button>
+                            <!-- <a href="index.php?agent_id=<?php echo "$agent_id"; ?>&agent_profile"
+                                class="nav-link text-dark bg-info my-1 mx-1">My Profile</a></button> -->
+                            <a class="nav-link active" aria-current="page"
+                                href='profile_page.php?agent_id=<?php echo "$agent_id"; ?>'>My Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -136,9 +138,9 @@ if (isset($_GET['agent_id'])) {
        <!-- fourth child -->
 <div class="container my-3">
     <?php
-    if (isset($_GET['agent_profile'])) {
-        include('profile_page.php');
-    }
+    // if (isset($_GET['agent_profile'])) {
+    //     include('profile_page.php');
+    // }
     if (isset($_GET['agent_offline'])) {
         include('agent_offline.php');
     }

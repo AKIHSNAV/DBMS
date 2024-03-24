@@ -6,10 +6,14 @@
     $earning_paid = $row_data["earning_paid"];
     $earning_total = $row_data["earning_total"];
     $upiID = $row_data["upiID"];
-        // earning_balance, earning_paid, earning_total,
+        if ($earning_balance == 0) {
+            echo "<script> alert('No earnings available for withdraw. Complete orders to earn.')</script>";
+            exit();
+        }
 ?>
 
 <div class="container mt-3">
+
     <h2 class="text-center">Withdraw Amount</h2>
     <h4 class="w-50 m-auto my-4">Current Balance: ₹<?php echo "$earning_balance";?></h4>
     <form action="" method="post" enctype="multipart/form-data">
@@ -58,7 +62,7 @@ if (isset ($_POST['edit_amount'])) {
         
         $new_amount = $earning_balance - $added_amount;
         $new_paid = $earning_paid + $added_amount;
-        $update_query = "UPDATE delivery_agent_wallet SET earning_balance = '$new_amount' AND earning_paid = '$new_paid' WHERE agentID = '$agent_id';";
+        $update_query = "UPDATE delivery_agent_wallet SET earning_balance = '$new_amount' , earning_paid = '$new_paid' WHERE agentID = '$agent_id';";
         
         $result_query = mysqli_query($con, $update_query);
         if ($result_query) {

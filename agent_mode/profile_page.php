@@ -72,7 +72,7 @@ else{
 <body>
 
     <!-- responsive navbar - container fluid is a bootstrap class which takes complete 100% width -->
-    <!-- <div class="container-fluid p-0">
+    <div class="container-fluid p-0">
 
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container-fluid">
@@ -95,13 +95,13 @@ else{
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a href="" class="nav-link text-dark">Welcome
-                                <?php echo "$agent_name"; ?>
+                                <?php echo "$agent_name"; ?> 
                             </a>
                         </li>
                     </ul>
                 </nav>
             </div>
-        </nav> -->
+        </nav>
 
         <!-- second child -->
 
