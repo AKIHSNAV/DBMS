@@ -1,5 +1,6 @@
 <?php
 include ('../includes/connect.php');
+include ('age_trigger.php');
 ?>
 
 <!DOCTYPE html>
