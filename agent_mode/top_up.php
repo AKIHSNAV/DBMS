@@ -58,7 +58,7 @@ if (isset ($_POST['edit_amount'])) {
         
         $new_amount = $earning_balance - $added_amount;
         $new_paid = $earning_paid + $added_amount;
-        $update_query = "UPDATE delivery_agent_wallet SET earning_balance = '$new_amount' AND earning_paid = '$new_paid' WHERE agentID = '$agent_id';";
+        $update_query = "UPDATE delivery_agent_wallet SET earning_balance = '$new_amount' , earning_paid = '$new_paid' WHERE agentID = '$agent_id';";
         
         $result_query = mysqli_query($con, $update_query);
         if ($result_query) {
