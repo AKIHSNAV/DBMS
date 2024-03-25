@@ -1,6 +1,7 @@
 <?php
 // include('../includes/connect.php'); // Connect file to MySQL - already did in common_function.php and including that file
 include ('../functions/common_function.php'); // Common functions file
+include ('busystatus_trigger.php');
 
 if (isset ($_GET['customer_id'])) {
     $cust_id = $_GET['customer_id'];
