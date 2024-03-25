@@ -59,8 +59,8 @@ if (isset ($_GET['customer_id'])) {
     }
 
     // making this assigned agent busy
-    $update_agent = "UPDATE deliveryAgent SET availabilityStatus='Busy' WHERE agentID = '$random_agent_id';";
-    $result_update = mysqli_query($con, $update_agent);
+    // $update_agent = "UPDATE deliveryAgent SET availabilityStatus='Busy' WHERE agentID = '$random_agent_id';";
+    // $result_update = mysqli_query($con, $update_agent);
 
     // Convert Cart to Order & OrderConsistsProduct
     $get_orders = "SELECT * FROM `order`;";
