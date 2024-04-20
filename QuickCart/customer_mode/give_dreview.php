@@ -1,5 +1,5 @@
 <?php
-if (isset ($_GET['give_dreview']) and isset ($_GET['customer_id']) and isset ($_GET['order_id']) and isset ($_GET['agent_id'])) {
+if (isset($_GET['give_dreview']) and isset($_GET['customer_id']) and isset($_GET['order_id']) and isset($_GET['agent_id'])) {
     $cust_id = $_GET['customer_id'];
     $order_id = $_GET['order_id'];
     $agent_id = $_GET['agent_id'];
@@ -40,48 +40,65 @@ if (isset ($_GET['give_dreview']) and isset ($_GET['customer_id']) and isset ($_
 
 <!-- updating review's details in the database -->
 <?php
-if (isset ($_POST['submit_review1'])) {
+if (isset($_POST['submit_review1'])) {
     $comment = $_POST['comment'];
     $rating = $_POST['rating'];
     $tip = $_POST['tip'];
 
-    $get_dreview = "SELECT * FROM DeliveryReview;";
-    $result_get = mysqli_query($con, $get_dreview);
-    $no_of_reviews = mysqli_num_rows($result_get);
-    $review_id = $no_of_reviews + 1;
-
-    $insert_review = "INSERT INTO DeliveryReview (deliveryReviewID, orderID, agentID, comment, rating, tip) VALUES
-    ('$review_id', '$order_id', '$agent_id', '$comment', '$rating','$tip');";
-    $result_insert = mysqli_query($con, $insert_review);
-
-    $get_data = "SELECT * FROM delivery_agent_wallet WHERE agentID = $agent_id;";
-    $result_get = mysqli_query($con, $get_data);
+    // Here, check tip <= customer's wallet & deduct amount from the wallet
+    $get_wallet = "SELECT * FROM wallet WHERE customerID = '$cust_id';";
+    $result_get = mysqli_query($con, $get_wallet);
     $row_data = mysqli_fetch_assoc($result_get);
-    $earning_balance = $row_data["earning_balance"];
-    $earning_paid = $row_data["earning_paid"];
-    $earning_total = $row_data["earning_total"];
-    $trans_history = $row_data["Transaction_history"];
+    $balance = $row_data["balance"];
 
-    $newBalance = $earning_balance + $tip;
-    $newBalance1 = number_format($newBalance, 2); 
-    $newTotal = $earning_total + $tip;
-    $newTotal1 = number_format($newTotal, 2);
-
-
-    $current_date = date("d-m-Y");
-    
-    
-    if ($tip > 0) {
-        $trans_statement = "$current_date^ You were tipped ₹$tip for delivering order $order_id^ $newBalance1^ $earning_paid^ $newTotal1";
+    if ($balance < $tip) {
+        echo "<script> alert('You don\'t have enough balance.')</script>";
+        exit();
     } else {
-        $trans_statement = "";
-    }
-    $new_Trans = $trans_history . "| " . $trans_statement;
-    $update_Dwallet = "UPDATE delivery_agent_wallet SET earning_balance = earning_balance + $tip, earning_total = earning_total + $tip, Transaction_history = '$new_Trans' WHERE agentID = '$agent_id';";
-    $result_Dwallet = mysqli_query($con, $update_Dwallet);
 
-    if ($result_insert and $result_Dwallet) {
-        echo "<script>alert('Thank you for the review. We will try to improve based on your valuable feedback.'); window.location.href = 'profile_page.php?customer_id=" . $cust_id . "&rate_delivery';</script>";
+        $new_amount = $balance - $tip;
+        $update_query = "UPDATE wallet SET balance = '$new_amount' WHERE customerID = '$cust_id';";
+        $result_query = mysqli_query($con, $update_query);
+
+
+        $get_dreview = "SELECT * FROM DeliveryReview;";
+        $result_get = mysqli_query($con, $get_dreview);
+        $no_of_reviews = mysqli_num_rows($result_get);
+        $review_id = $no_of_reviews + 1;
+
+        $insert_review = "INSERT INTO DeliveryReview (deliveryReviewID, orderID, agentID, comment, rating, tip) VALUES
+    ('$review_id', '$order_id', '$agent_id', '$comment', '$rating','$tip');";
+        $result_insert = mysqli_query($con, $insert_review);
+
+        $get_data = "SELECT * FROM delivery_agent_wallet WHERE agentID = $agent_id;";
+        $result_get = mysqli_query($con, $get_data);
+        $row_data = mysqli_fetch_assoc($result_get);
+        $earning_balance = $row_data["earning_balance"];
+        $earning_paid = $row_data["earning_paid"];
+        $earning_total = $row_data["earning_total"];
+        $trans_history = $row_data["Transaction_history"];
+
+        $newBalance = $earning_balance + $tip;
+        $newBalance1 = number_format($newBalance, 2);
+        $newTotal = $earning_total + $tip;
+        $newTotal1 = number_format($newTotal, 2);
+
+
+        $current_date = date("d-m-Y");
+
+
+        if ($tip > 0) {
+            $trans_statement = "$current_date^ You were tipped ₹$tip for delivering order $order_id^ $newBalance1^ $earning_paid^ $newTotal1";
+        } else {
+            $trans_statement = "";
+        }
+        $new_Trans = $trans_history . "| " . $trans_statement;
+        $update_Dwallet = "UPDATE delivery_agent_wallet SET earning_balance = earning_balance + $tip, earning_total = earning_total + $tip, Transaction_history = '$new_Trans' WHERE agentID = '$agent_id';";
+        $result_Dwallet = mysqli_query($con, $update_Dwallet);
+
+        if ($result_insert and $result_Dwallet and $result_query) {
+            echo "<script>alert('Thank you for the review. We will try to improve based on your valuable feedback.'); window.location.href = 'profile_page.php?customer_id=" . $cust_id . "&rate_delivery';</script>";
+        }
     }
 }
 ?>
